@@ -4,12 +4,12 @@
 
 ## 📅 MDP 프로젝트 계획
 
-**Software**\
+**Software**
 - stm32 보드로 적외선 센서 제어 코드 조사\
 - stm32 보드로 FND 제어 코드 조사\
 - stm32 보드의 점수 리턴 값을 시리얼 통신으로 받아 파이썬 tkinter로 등수, 점수 표시하는 코드 조사
 
-**Hardware**\
+**Hardware**
 - stm32 보드를 가운데로 결선도 그리기\
 - AUTO, FREE CAD로 아크릴판, 포맥스 재단할 디자인 그리기
 
