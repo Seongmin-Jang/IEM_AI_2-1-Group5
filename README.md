@@ -27,3 +27,5 @@
 * 신승철 - 설계, 개발
 * 장성민 - 설계, 개발
 * 유상우 - 설계, 개발
+
+https://github.com/Seongmin-Jang/IEM_AI_2-1-Group5/assets/147483096/5d983082-276a-4471-b2ae-c7b6d87a648e
