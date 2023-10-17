@@ -28,6 +28,4 @@
 * 장성민 - 설계, 개발
 * 유상우 - 설계, 개발
 
-* https://github-production-user-asset-6210df.s3.amazonaws.com/147483096/275743634-5d983082-276a-4471-b2ae-c7b6d87a648e.PNG
-
-https://github.com/Seongmin-Jang/IEM_AI_2-1-Group5/assets/147483096/5d983082-276a-4471-b2ae-c7b6d87a648e
+![mdp 결선도](https://github.com/Seongmin-Jang/IEM_AI_2-1-Group5/assets/147483096/a4c7ae22-edb2-47a0-bb78-f6b36ca5b7e8)
