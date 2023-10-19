@@ -7,3 +7,57 @@ uint8_t fndpos;
 uint8_t Acommand=-1;
 /* USER CODE END PV */
 
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if(huart->Instance == USART3){
+ 
+		if(rx=='\n'){
+			buf[bufindex] = 0;
+			char *p;
+ 
+			if((p = strstr((char*)buf, "FND")) != NULL){
+				fndnum = *(p+4)-'0';
+				if(*(p+3) !='A'){
+					Acommand=0;
+					fndpos = *(p+3)-'0';
+				}else {
+					Acommand=1;
+				}
+			}
+			bufindex=0;
+		}else {
+			if(bufindex <10){
+				buf[bufindex++] = rx;
+			}
+		}
+		HAL_UART_Receive_IT(&huart3, &rx, 1);
+	}
+ 
+}
+ 
+/* USER CODE END 4 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+	  while(Acommand==1){
+		  DisplayFND(ttl7447(fndnum),1);
+		  DisplayFND(ttl7447(fndnum),2);
+		  DisplayFND(ttl7447(fndnum),3);
+		  DisplayFND(ttl7447(fndnum),4);
+		  DisplayFND(ttl7447('X'),1);
+		  DisplayFND(ttl7447('X'),2);
+		  DisplayFND(ttl7447('X'),3);
+		  DisplayFND(ttl7447('X'),4);
+	  }
+ 
+	  while(Acommand==0){
+		  DisplayFND(ttl7447(fndnum),fndpos);
+	  }
+ 
+    /* USER CODE END WHILE */
+ 
+    /* USER CODE BEGIN 3 */
+  }
+  /* USER CODE END 3 */
