@@ -1,0 +1,9 @@
+/* USER CODE BEGIN PV */
+uint8_t rx;
+uint8_t bufindex=0;
+uint8_t buf[10];
+uint8_t fndnum;
+uint8_t fndpos;
+uint8_t Acommand=-1;
+/* USER CODE END PV */
+
