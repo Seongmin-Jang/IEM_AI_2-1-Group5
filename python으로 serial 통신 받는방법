@@ -1,32 +1,28 @@
-라즈베리 파이 400에서 비쥬얼 스튜디오 코드로 파이썬 코드를 작성한다. 점수를 시리얼 통신으로 int값으로 받는다.
+라즈베리 파이 400에서 비쥬얼 스튜디오 코드로 파이썬 코드를 작성한다. 점수를 시리얼 통신으로 숫자로 받는다.
 
-시리얼 통신을 통해 받은 숫자를 파이썬으로 출력하려면 파이썬에서 시리얼 통신을 관리할 수 있는 라이브러리를 사용해야 합니다. 파이썬에서 시리얼 통신을 다루기 위해 주로 사용되는 라이브러리 중 하나는 PySerial입니다. PySerial을 사용하여 시리얼 포트를 열고 데이터를 읽는 코드를 작성할 수 있습니다.
+pip install pyserial 
+(pyserial 라이브러리 설치)
 
-먼저, PySerial을 설치해야함.
 
-pip install pyserial
+import time          // 타임모듈 불러오기
+import serial        //pyserial 모듈 불러오기
 
-//예제 코드
 
-import serial
+ser = serial.Serial(                 // serial 객체 생성
+        port='/dev/ttyAMA1',         // 시리얼통신에 사용할 포트
+        baudrate=115200,                // 통신속도 지정
+        parity=serial.PARITY_NONE,       // 패리티 비트 설정방식
+        stopbits=serial.STOPBITS_ONE,     // 스톱비트 지정
+        bytesize=serial.EIGHTBITS,        // 데이터 비트수 지정
+        timeout=1                        // 타임아웃 설정
+        )
 
-# 시리얼 포트 이름과 속도를 설정합니다.
-ser = serial.Serial('COM1', 9600)  # 시리얼 포트 이름과 속도를 적절하게 변경하세요.
 
-try:
-    while True:
-        # 시리얼 통신을 통해 데이터를 읽어옵니다.
-        data = ser.readline().decode('utf-8').strip()  # 데이터의 인코딩에 따라 decode를 변경할 수 있습니다.
-
-        # 받은 데이터를 출력합니다.
-        print("받은 데이터:", data)
-
-except KeyboardInterrupt:
-    # Ctrl+C를 누를 때까지 루프를 실행합니다.
-    print("시리얼 통신을 종료합니다.")
-
-finally:
-    # 시리얼 포트를 닫습니다.
-    ser.close()
-
-이코드와 랭킹 코드를 적당히 합해 코드를 완성한다.
+while True:                         // 반복해서 숫자값을 입력받음, 이때 숫자가 아닌 값을 입력하면 다시 입력을 요구
+    degree = input('숫자값 받는중\r\n')
+    if degree.isdigit():
+        //ser.write(degree.encode()) << (시리얼로 숫자를 다시 보내는코드 혹시몰라 주석처리로 써놓음)
+        print(degree); // 받은 숫자값을 print
+    else:
+        print("숫자값만 받을수있음.") 
+    
