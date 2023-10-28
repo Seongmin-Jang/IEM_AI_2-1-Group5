@@ -9,7 +9,7 @@ import serial        //pyserial 모듈 불러오기
 
 
 ser = serial.Serial(                 // serial 객체 생성
-        port='/dev/ttyAMA1',         // 시리얼통신에 사용할 포트
+        port='/dev/ttyAMA1',         // 시리얼통신에 사용할 포트 ( 우리가 사용할 포트 아직 모름 수정필요)
         baudrate=115200,                // 통신속도 지정
         parity=serial.PARITY_NONE,       // 패리티 비트 설정방식
         stopbits=serial.STOPBITS_ONE,     // 스톱비트 지정
