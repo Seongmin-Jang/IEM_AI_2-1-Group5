@@ -40,7 +40,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-ADC_HandleTypeDef hadc1;
+TIM_HandleTypeDef htim3;
 
 UART_HandleTypeDef huart2;
 
@@ -52,35 +52,64 @@ UART_HandleTypeDef huart2;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
-static void MX_ADC1_Init(void);
+static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint16_t score = 0;
-uint8_t sensor1 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
-uint8_t sensor2 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1);
-uint8_t sensor3 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4);
-uint8_t sensor4 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6);
-uint8_t sensor5 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7);
-uint8_t sensor6 = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0);
-uint8_t sensor7 = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1);
-uint8_t sensor8 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0);
-uint8_t sensor9 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1);
-uint8_t sensor10 = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_2);
-uint8_t led1 = HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, sensor1);
-uint8_t led2 = HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, sensor2);
-uint8_t led3 = HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, sensor3);
-uint8_t led4 = HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, sensor4);
-uint8_t led5 = HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, sensor5);
-uint8_t led6 = HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, sensor6);
-uint8_t led7 = HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, sensor7);
-uint8_t led8 = HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, sensor8);
-uint8_t led9 = HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, sensor9);
-uint8_t led10 = HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, sensor10);
-
+uint8_t button1 = 0;
+void get_score1(void)
+{
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, sensor);
+	HAL_Delay(1);
+}
+void get_score2(void)
+{
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, sensor);
+	HAL_Delay(1);
+}
+void get_score3(void)
+{
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, sensor);
+	HAL_Delay(1);
+}
+void get_score4(void)
+{
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, sensor);
+	HAL_Delay(1);
+}
+void get_score5(void)
+{
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, sensor);
+	HAL_Delay(1);
+}
+void get_score6(void)
+{
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, sensor);
+	HAL_Delay(1);
+}
+void get_score7(void)
+{
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, sensor);
+	HAL_Delay(1);
+}
+void get_score8(void)
+{
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, sensor);
+	HAL_Delay(1);
+}
+void get_score9(void)
+{
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, sensor);
+	HAL_Delay(1);
+}
+void get_score10(void)
+{
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, sensor);
+	HAL_Delay(1);
+}
 /* USER CODE END 0 */
 
 /**
@@ -112,18 +141,47 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART2_UART_Init();
-  MX_ADC1_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
-    
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if(sensor1 == 0)
+	  if (button1 == 1)
 	  {
-		  score += 100;
+		  while(1)
+		  {
+			  for (int i=0; i<30000; i++)
+			  {
+				  sensor1 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
+				  sensor2 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1);
+				  sensor3 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4);
+				  sensor4 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6);
+				  sensor5 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7);
+				  sensor6 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_8);
+				  sensor7 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9);
+				  sensor8 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_10);
+				  sensor9 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11);
+				  sensor10 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12);
+				  get_score1();
+				  get_score2();
+				  get_score3();
+				  get_score4();
+				  get_score5();
+				  get_score6();
+				  get_score7();
+				  get_score8();
+				  get_score9();
+				  get_score10();
+
+			  }
+
+			  break;
+
+		  }
 
 	  }
     /* USER CODE END WHILE */
@@ -141,7 +199,6 @@ void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
@@ -171,139 +228,50 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
-  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
-  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
-  {
-    Error_Handler();
-  }
 }
 
 /**
-  * @brief ADC1 Initialization Function
+  * @brief TIM3 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_ADC1_Init(void)
+static void MX_TIM3_Init(void)
 {
 
-  /* USER CODE BEGIN ADC1_Init 0 */
+  /* USER CODE BEGIN TIM3_Init 0 */
 
-  /* USER CODE END ADC1_Init 0 */
+  /* USER CODE END TIM3_Init 0 */
 
-  ADC_ChannelConfTypeDef sConfig = {0};
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
 
-  /* USER CODE BEGIN ADC1_Init 1 */
+  /* USER CODE BEGIN TIM3_Init 1 */
 
-  /* USER CODE END ADC1_Init 1 */
-
-  /** Common config
-  */
-  hadc1.Instance = ADC1;
-  hadc1.Init.ScanConvMode = ADC_SCAN_ENABLE;
-  hadc1.Init.ContinuousConvMode = ENABLE;
-  hadc1.Init.DiscontinuousConvMode = DISABLE;
-  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc1.Init.NbrOfConversion = 10;
-  if (HAL_ADC_Init(&hadc1) != HAL_OK)
+  /* USER CODE END TIM3_Init 1 */
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 72-1;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 30000;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
   {
     Error_Handler();
   }
-
-  /** Configure Regular Channel
-  */
-  sConfig.Channel = ADC_CHANNEL_0;
-  sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
   {
     Error_Handler();
   }
-
-  /** Configure Regular Channel
-  */
-  sConfig.Channel = ADC_CHANNEL_1;
-  sConfig.Rank = ADC_REGULAR_RANK_2;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
   {
     Error_Handler();
   }
+  /* USER CODE BEGIN TIM3_Init 2 */
 
-  /** Configure Regular Channel
-  */
-  sConfig.Channel = ADC_CHANNEL_4;
-  sConfig.Rank = ADC_REGULAR_RANK_3;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Configure Regular Channel
-  */
-  sConfig.Channel = ADC_CHANNEL_6;
-  sConfig.Rank = ADC_REGULAR_RANK_4;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Configure Regular Channel
-  */
-  sConfig.Channel = ADC_CHANNEL_7;
-  sConfig.Rank = ADC_REGULAR_RANK_5;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Configure Regular Channel
-  */
-  sConfig.Channel = ADC_CHANNEL_8;
-  sConfig.Rank = ADC_REGULAR_RANK_6;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Configure Regular Channel
-  */
-  sConfig.Channel = ADC_CHANNEL_9;
-  sConfig.Rank = ADC_REGULAR_RANK_7;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Configure Regular Channel
-  */
-  sConfig.Channel = ADC_CHANNEL_10;
-  sConfig.Rank = ADC_REGULAR_RANK_8;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Configure Regular Channel
-  */
-  sConfig.Channel = ADC_CHANNEL_11;
-  sConfig.Rank = ADC_REGULAR_RANK_9;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Configure Regular Channel
-  */
-  sConfig.Channel = ADC_CHANNEL_12;
-  sConfig.Rank = ADC_REGULAR_RANK_10;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN ADC1_Init 2 */
-
-  /* USER CODE END ADC1_Init 2 */
+  /* USER CODE END TIM3_Init 2 */
 
 }
 
@@ -358,7 +326,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0|LD2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
@@ -366,12 +334,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : LD2_Pin */
-  GPIO_InitStruct.Pin = LD2_Pin;
+  /*Configure GPIO pins : PA0 LD2_Pin */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|LD2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
