@@ -77,49 +77,49 @@ void LED2(void)
 }
 void LED3(void)
 {
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, sensor);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, sensor3);
 	score += 100;
 	HAL_Delay(1);
 }
 void LED4(void)
 {
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, sensor);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, sensor4);
 	score += 100;
 	HAL_Delay(1);
 }
 void LED5(void)
 {
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, sensor);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, sensor5);
 	score += 100;
 	HAL_Delay(1);
 }
 void LED6(void)
 {
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, sensor);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, sensor6);
 	score += 100;
 	HAL_Delay(1);
 }
 void LED7(void)
 {
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, sensor);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, sensor7);
 	score += 100;
 	HAL_Delay(1);
 }
 void LED8(void)
 {
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, sensor);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, sensor8);
 	score += 100;
 	HAL_Delay(1);
 }
 void LED9(void)
 {
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, sensor);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, sensor9);
 	score += 100;
 	HAL_Delay(1);
 }
 void LED10(void)
 {
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, sensor);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, sensor10);
 	score += 100;
 	HAL_Delay(1);
 }
@@ -189,18 +189,18 @@ int main(void)
 					  LED4();}
 				  if (sensor5 == 0){
 					  LED5();}
-			      	  if (sensor6 == 0){
-			    	 	  LED6();}
-			          if (sensor7 == 0){
-			    	  	  LED7();}
+			      if (sensor6 == 0){
+			    	  LED6();}
+			      if (sensor7 == 0){
+			    	  LED7();}
 				  if (sensor8 == 0){
 					  LED8();}
-		         	  if (sensor9 == 0){
-		        	  	  LED9();}
+		          if (sensor9 == 0){
+		        	  LED9();}
 				  if (sensor10 == 0){
 					  LED10();}
 				  else{
-					HAL_Delay(1);
+					  HAL_Delay(1);
 				  }
 
 
