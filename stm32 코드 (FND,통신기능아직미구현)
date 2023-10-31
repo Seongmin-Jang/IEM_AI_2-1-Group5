@@ -132,7 +132,7 @@ sensor6 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_8);
 sensor7 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9);
 sensor8 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_10);
 sensor9 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11);
-sensor10 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12);//전역변수 해야함
+sensor10 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12);
 /* USER CODE END 0 */
 
 /**
