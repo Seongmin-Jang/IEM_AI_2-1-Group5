@@ -60,56 +60,79 @@ static void MX_TIM3_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 uint8_t button1 = 0;
-void get_score1(void)
+uint16_t score = 0;
+// LED 전역변수들에다가 점수를 시리얼 통신으로 보내는 함수쓰면 OK
+void LED1(void)
 {
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, sensor);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, sensor1);
+	score += 100;
+	HAL_Delay(1);
+	//HAL_UART_Transmit 어쩌구저쩌구 살라살라
+}
+void LED2(void)
+{
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, sensor2);
+	score += 100;
 	HAL_Delay(1);
 }
-void get_score2(void)
-{
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, sensor);
-	HAL_Delay(1);
-}
-void get_score3(void)
+void LED3(void)
 {
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, sensor);
+	score += 100;
 	HAL_Delay(1);
 }
-void get_score4(void)
+void LED4(void)
 {
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, sensor);
+	score += 100;
 	HAL_Delay(1);
 }
-void get_score5(void)
+void LED5(void)
 {
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, sensor);
+	score += 100;
 	HAL_Delay(1);
 }
-void get_score6(void)
+void LED6(void)
 {
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, sensor);
+	score += 100;
 	HAL_Delay(1);
 }
-void get_score7(void)
+void LED7(void)
 {
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, sensor);
+	score += 100;
 	HAL_Delay(1);
 }
-void get_score8(void)
+void LED8(void)
 {
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, sensor);
+	score += 100;
 	HAL_Delay(1);
 }
-void get_score9(void)
+void LED9(void)
 {
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, sensor);
+	score += 100;
 	HAL_Delay(1);
 }
-void get_score10(void)
+void LED10(void)
 {
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, sensor);
+	score += 100;
 	HAL_Delay(1);
 }
+sensor1 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
+sensor2 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1);
+sensor3 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4);
+sensor4 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6);
+sensor5 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7);
+sensor6 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_8);
+sensor7 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9);
+sensor8 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_10);
+sensor9 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11);
+sensor10 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12);//전역변수 해야함
 /* USER CODE END 0 */
 
 /**
@@ -150,32 +173,36 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if (button1 == 1)
+	  if (button1 == HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0,1 ))
 	  {
 		  while(1)
 		  {
-			  for (int i=0; i<30000; i++)
+			  for (int i=0; i<3000; i++)
 			  {
-				  sensor1 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
-				  sensor2 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1);
-				  sensor3 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4);
-				  sensor4 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6);
-				  sensor5 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7);
-				  sensor6 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_8);
-				  sensor7 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9);
-				  sensor8 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_10);
-				  sensor9 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11);
-				  sensor10 = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_12);
-				  get_score1();
-				  get_score2();
-				  get_score3();
-				  get_score4();
-				  get_score5();
-				  get_score6();
-				  get_score7();
-				  get_score8();
-				  get_score9();
-				  get_score10();
+				  if (sensor1 == 0){
+					  LED1();}
+				  if (sensor2 == 0){
+					  LED2();}
+				  if (sensor3 == 0){
+					  LED3();}
+				  if (sensor4 == 0){
+					  LED4();}
+				  if (sensor5 == 0){
+					  LED5();}
+			      if (sensor6 == 0){
+			    	  LED6();}
+			      if (sensor7 == 0){
+			    	  LED7();}
+				  if (sensor8 == 0){
+					  LED8();}
+		          if (sensor9 == 0){
+		        	  LED9();}
+				  if (sensor10 == 0){
+					  LED10();}
+				  else{
+					  HAL_Delay(1);
+				  }
+
 
 			  }
 
