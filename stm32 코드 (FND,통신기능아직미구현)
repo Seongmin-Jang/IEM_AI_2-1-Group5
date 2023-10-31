@@ -189,18 +189,18 @@ int main(void)
 					  LED4();}
 				  if (sensor5 == 0){
 					  LED5();}
-			      if (sensor6 == 0){
-			    	  LED6();}
-			      if (sensor7 == 0){
-			    	  LED7();}
+			      	  if (sensor6 == 0){
+			    	 	  LED6();}
+			          if (sensor7 == 0){
+			    	  	  LED7();}
 				  if (sensor8 == 0){
 					  LED8();}
-		          if (sensor9 == 0){
-		        	  LED9();}
+		         	  if (sensor9 == 0){
+		        	  	  LED9();}
 				  if (sensor10 == 0){
 					  LED10();}
 				  else{
-					  HAL_Delay(1);
+					HAL_Delay(1);
 				  }
 
 
