@@ -31,3 +31,6 @@
 
 ## 📐 결선도
 ![mdp 결선도](https://github.com/Seongmin-Jang/IEM_AI_2-1-Group5/assets/147483096/a4c7ae22-edb2-47a0-bb78-f6b36ca5b7e8)
+
+## ⚠️ - 문제점들
+* FND의 전압은 5V가 필요합니다. 그러나 stm32 nucleo 보드에 기본적으로 인가되는 내부전압은 3.3V였습니다. 그래서 저희는 외부전원과 74LS48 IC를 사용해 FND의 구동을 성공적으로 하였습니다.
