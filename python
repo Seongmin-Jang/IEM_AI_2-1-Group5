@@ -1,0 +1,67 @@
+# 
+#
+#
+# 2023/12/07 현재 상태 : stm32와 라즈베리파이 시리얼 통신은 작동해 점수는 잘 받지만 랭킹 코드가 작동하지않음 time을 사용해 보드쪽에서 버튼을 누를시 "5" 라는 문자가 전송되고
+# "5" 라는 문자가 감지되면 30초간 다트게임의 작동을 시작한다
+
+import tkinter as tk
+from tkinter import messagebox
+import serial
+import time
+import threading
+print(1)
+# 빈 리스트를 생성하여 랭킹을 저장할 준비를 합니다.
+rankings = []
+score = 0
+button_pressed = "0"
+ser = serial.Serial()
+ser.port = '/dev/serial0' 
+ser.baudrate = 115200
+ser.open() 
+
+def update_ranking_label():
+    ranking_label.config(text="RANK:\n" + "\n".join([f"{i+1}st: {s}" for i, s in enumerate(rankings)]))
+#def display_socre(): << 최규영한테 물어보기
+
+
+# 시리얼 에서 받아온 점수 출력 함수
+def add_score():
+    global score
+    button_pressed = int(ser.readline().decode().strip())
+    print(button_pressed)
+    if button_pressed == 100:
+        start_time = time.time()
+        while True:
+            now_time = time.time()
+            # 사용자로부터 입력받은 문자열 리스트에 추가
+            score = ser.readline().decode().strip()
+            rankings.append(score)
+            # 랭킹 리스트를 내림차순으로 정렬합니다.
+            rankings.sort(reverse=True)
+            print(score)
+            # 업데이트된 랭킹을 출력합니다.
+            update_ranking_label()
+            if (now_time - start_time) == 30:
+                break
+            #time.sleep(1)
+# 랭킹을 업데이트하고 라벨에 표시하는 함수
+
+serial_thread = threading.Thread(target=add_score)
+# 데몬 속성을 활성화 했다는 말은 백그라운드에서 계속 실행 하고 있다는 말이야.
+serial_thread.daemon = True
+serial_thread.start()
+
+# 메인 윈도우 생성
+root = tk.Tk()
+root.title("DART RANKING")
+
+# 입력받을 점수 입력 필드와 '점수 추가' 버튼 생성
+
+# 랭킹을 표시할 라벨 생성
+ranking_label = tk.Label(root, text="RANK:")
+ranking_label.pack()
+score_label = tk.Label(root, text=score)
+score_label = score_label.pack()
+
+# GUI 시작
+root.mainloop()
